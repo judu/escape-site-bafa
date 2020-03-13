@@ -1,0 +1,7 @@
+@(userForm: Form[controllers.DirNum])(implicit messages: Messages)
+
+@main("Quel est ton numéro d'adhérent ?") {
+@helper.form(action = routes.HomeController.doLogin()) {
+@helper.inputText(userform("num_adh"))
+}
+}
