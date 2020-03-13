@@ -13,6 +13,7 @@ import scala.concurrent.Future
 
 case class Directeur(
   num_adh: String,
+  nom: String,
   piece_of_code: String,
   rep_enigme_a: Option[String],
   rep_enigme_b: Option[String],
@@ -27,12 +28,13 @@ case class Directeur(
 )
 
 @javax.inject.Singleton
-class DirecteurRepository @Inject()(dbapi: DBApi)(implicit ec: DatabaseExecutionContext) {
+class DirecteurRepository @Inject()(dbapi: DBApi) {
 
   private val db = dbapi.database("default")
 
   val parser = {
     str("num_adh") ~
+    str("nom") ~
     str("piece_of_code") ~
     get[Option[String]]("rep_enigme_a") ~
     get[Option[String]]("rep_enigme_b") ~
@@ -44,31 +46,31 @@ class DirecteurRepository @Inject()(dbapi: DBApi)(implicit ec: DatabaseExecution
     get[Boolean]("enigme_c_ok") ~
     get[Boolean]("enigme_d_ok") ~
     get[Boolean]("enigme_e_ok") map {
-      case num~poc~a~b~c~d~e~aok~bok~cok~dok~eok =>
-        Directeur(num, poc, a, b, c, d, e, aok, bok, cok, dok, eok)
+      case num~nom~poc~a~b~c~d~e~aok~bok~cok~dok~eok =>
+        Directeur(num, nom, poc, a, b, c, d, e, aok, bok, cok, dok, eok)
     }
   }
 
 
   def getDirecteur(num: String): Option[Directeur] = db.withConnection { implicit connection =>
-    SQL("""SELECT num_adh ,piece_of_code ,rep_enigme_a ,rep_enigme_b ,rep_enigme_c
+    SQL("""SELECT num_adh , nom, piece_of_code ,rep_enigme_a ,rep_enigme_b ,rep_enigme_c
     ,rep_enigme_d ,rep_enigme_e ,enigme_a_ok ,enigme_b_ok ,enigme_c_ok ,enigme_d_ok ,enigme_e_ok
     FROM sgdf_users
     WHERE num_adh = {num_adh}""")
-      .on('num_adh -> num)
+      .on(Symbol("num_adh") -> num)
       .as(parser.*)
       .headOption
   }
 
   def setEnigmeResponse(num: String, name: String, reponse: String) = db.withConnection { implicit connection =>
     SQL(s"UPDATE sgdf_users SET ${name} = {response} WHERE num_adh = {num}")
-      .on('response -> reponse, 'num -> num)
+      .on(Symbol("response") -> reponse, Symbol("num") -> num)
       .execute()
   }
 
   def setEnigmeResponseOk(num: String, name: String) = db.withConnection { implicit connection =>
     SQL(s"UPDATE sgdf_users SET ${name} = true WHERE num_adh = {num}")
-      .on('num -> num)
+      .on(Symbol("num") -> num)
       .execute()
   }
 }

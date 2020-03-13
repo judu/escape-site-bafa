@@ -17,7 +17,9 @@ case class DirNum(num_adh: String)
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerComponents, actionBuilder: DefaultActionBuilder, langs: Langs, implicit val messagesApi: MessagesApi) extends BaseController {
+class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerComponents, actionBuilder: DefaultActionBuilder, langs: Langs) extends BaseController {
+
+  override def controllerComponents = cc
 
   implicit val lang: Lang = langs.availables.head
   implicit val messages: Messages = MessagesImpl(lang, messagesApi)
@@ -42,7 +44,7 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
 
 
   def Sessioned(f: SessionedRequest[AnyContent] => Result): Action[AnyContent]  = {
-    Sessioned(cc.parsers.defaultBodyParser)(f)
+    Sessioned(controllerComponents.parsers.defaultBodyParser)(f)
   }
 
   def Sessioned[A](p: BodyParser[A])(f: SessionedRequest[A] => Result): Action[A] = actionBuilder(p) { request =>
@@ -55,11 +57,12 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
   }
 
   def doLogin() = Action { implicit request: Request[AnyContent] =>
-    val num_adh = request.body.asText.getOrElse("")
-    storage.getDirecteur(num_adh) match {
-      case Some(dir) => Redirect(routes.HomeController.index).withSession("num_adh" -> num_adh)
-      case None      => Redirect(routes.HomeController.loginPage).flashing("msg" -> )
-    }
+    dirForm.bindFromRequest.fold(formWithErrors => {
+      BadRequest(views.html.login(formWithErrors))
+    },
+    dirData => {
+      Redirect(routes.HomeController.index).withSession("num_adh" -> dirData.num_adh)
+    })
   }
 
   /**
@@ -75,7 +78,7 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
   }
 
   def page_enigme_a() = Sessioned { implicit request =>
-    Ok(views.html.enigme_a())
+    Ok(views.html.enigme_a(request.dir))
   }
 
   def upload_enigme_a() = Sessioned(parse.tolerantText) { implicit request =>
@@ -85,7 +88,7 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
   }
 
   def page_enigme_b() = Sessioned { implicit request =>
-    Ok(views.html.enigme_b())
+    Ok(views.html.enigme_b(request.dir))
   }
 
   def upload_enigme_b() = Sessioned(parse.tolerantText) { implicit request =>
@@ -95,7 +98,7 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
   }
 
   def page_enigme_c() = Sessioned { implicit request =>
-    Ok(views.html.enigme_c())
+    Ok(views.html.enigme_c(request.dir))
   }
 
   def upload_enigme_c() = Sessioned(parse.tolerantText) { implicit request =>
@@ -106,7 +109,7 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
 
 
   def page_enigme_d() = Sessioned { implicit request =>
-    Ok(views.html.enigme_d())
+    Ok(views.html.enigme_d(request.dir))
   }
 
   def upload_enigme_d() = Sessioned(parse.tolerantText) { implicit request =>
@@ -117,7 +120,7 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
 
 
   def page_enigme_e() = Sessioned { implicit request =>
-    Ok(views.html.enigme_e())
+    Ok(views.html.enigme_e(request.dir))
   }
 
   def upload_enigme_e() = Sessioned(parse.tolerantText) { implicit request =>
