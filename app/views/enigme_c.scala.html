@@ -1,4 +1,19 @@
 @(directeur: Directeur, repform: Form[controllers.Reponse])(implicit messages: Messages)
 
 @main("Une énigme", directeur.nom) {
+
+    <h1></h1>
+
+    <p> - mon premier débute l'alphabet<br/>
+        - mon deuxième est un jeune adulte en chemise verte, mais en plus court.<br/>
+        - mon deuxième n'est pas avoué.</br>
+       Tu feras le tout avec tes stagiaires pendant le camp.</p>
+
+       <form method="post">
+        <textarea name="reponse"></textarea>
+        <input type="submit"/>
+    </form>
+
+    @if(@directeur.enigme_c_ok) {}
+
 }
