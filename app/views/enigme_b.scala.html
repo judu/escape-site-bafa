@@ -1,4 +1,467 @@
 @()
 
 @main("Bienvenue à la formation !") {
+
+    <script>
+        function diplome(val)
+        {
+            var diplome = document.getElementById("diplome"+val).value;
+
+            var precision = [
+                "<option>-</option><option>CAFME</option><option>DEME</option>",
+                "<option>-</option><option>DEEJE</option><option>DEES</option>",
+                "<option>-</option><option>Liv. apt. Mon. CLSH </option><option>Liv. apt. Mon. CV </option><option>Moniteur CV</option>",
+                "<option>-</option><option>Liv. apt. Mon. CLSH </option><option>Liv. apt. Mon. CV </option><option>Moniteur CV</option>",
+                "<option>-</option><option>CQP Anim. 1er degré</option><option>CQP Anim. périsco.</option>",
+                "<option>-</option><option>CAP Petite enf.</option><option>DEUG STAPS</option><option>DIM MEEF 1</option><option>DIM MEEF 2</option><option>DIM MEEF enc. éduc</option><option>DIM MEEF ing. form</option><option>DUMI</option><option>DUT CS</option><option>Licence Sc. Educ.</option><option>Licence STAPS</option><option>LP AGODASSC</option><option>LP Anim. pol. ville.</option><option>LP Anim. soc. </option><option>LP Animation</option><option>LP AP CDPASCSC</option><option>LP CDPT</option><option>LP CPADSSC</option><option>LP CPDSCMU</option><option>LP DSMS</option><option>LP DSSCL</option><option>LP FVPI</option><option>LP ISDSMS</option><option>LP MPDESSC</option><option>LP MSEE</option><option>LP VAMT</option>",
+                '<option>-</option><option>Agrég.</option><option value="30">CA Prof.</option><option value="33">CACE</option><option value="34">CACPE</option><option value="29">CAP Instit.</option><option value="42">Certif. apt. prof. 2d deg.</option><option value="41">Certif. apt. prof. école.</option><option value="44">Certif. apt. prof. pro</option><option value="43">Certif. apt. prof. tech</option><option value="26">DEUST Anim.</option><option value="27">DEUST Anim. et gest. </option><option value="25">DUT Anim.</option><option value="32">Licence Anim.</option><option value="40">LP ASECL</option><option value="39">LP MASSESC</option><option value="35">MMEEF 1</option><option value="36">MMEEF 2</option><option value="37">MMEEF enc. éduc.</option><option value="38">MMEEF ing. form.</option><option value="28">Prof. École</option>',
+                '<option value="0">-</option><option value="109">AAAS Paris </option><option value="108">Adj.T Anim </option><option value="110">ATSEM </option><option value="111">Moniteur-éduc. Terr. </option>',
+                '<option value="0">-</option><option value="59">Anim Paris</option><option value="62">ASET Educ. Spé. </option><option value="58">AT </option><option value="56">ATA </option><option value="65">CAPSA Paris</option><option value="60">CTSE </option><option value="64">ET APS </option><option value="61">ETJE </option><option value="63">Prof. Paris </option><option value="57">SSE Paris Anim  </option>',
+                '<option value="0">-</option><option value="104">BTSA GPN</option>',
+                '<option value="0">-</option><option value="104">Moniteur EPS</option>',
+                '<option value="0">-</option><option value="49">Certif. Tech. EPS</option><option value="48">Moniteur chef EPS</option>',
+                '<option value="0">-</option><option value="104">AJSP</option>',
+                '<option value="0">-</option><option value="104">DPJJ</option>',
+                '<option value="0">-</option><option value="66">BAFA</option><option value="73">BAPAAT</option><option value="71">BEATEP</option><option value="70">BEES 1</option><option value="72">BPJEPS</option>',
+                '<option value="0">-</option><option value="21">Alp. Acc. moy. mont</option><option value="22">Alp. Guide</option><option value="1">BAFD</option><option value="16">BE Alp.</option><option value="11">BEATEP-ASVL</option><option value="14">BEES 2</option><option value="15">BEES 3</option><option value="17">BEESAPT</option><option value="12">BPJEPS-DIR ACM</option><option value="13">BPJEPS-LTP</option><option value="10">CAPASE</option><option value="18">CEPJ</option><option value="20">CTPS</option><option value="9">DECEP</option><option value="5">DEDPAD</option><option value="8">DEFA</option><option value="6">DEJEPS</option><option value="7">DESJEPS</option><option value="24">Moniteur ski alp.</option><option value="23">Moniteur ski fond</option><option value="19">PS</option>',
+                '<option>-</option>',
+                '<option>-</option><option>Assist. Unit. SUF</option><option>Attest. Capa.</option><option value="CAFASF">CAFA SF</option>',
+                '<option>-</option><option>Attest. Capa.</option><option value="CAFDSF">CA Dir SF</option><option>CA Resp. Unit. SF</option><option>Chef camp SUF</option><option>Chef groupe SUF</option><option>Licence de chef (CEP)</option>'
+            ];
+
+            document.getElementById("precision"+val).innerHTML = precision[diplome-1];
+
+        }
+
+        function check()
+        {
+            var res = true;
+
+            for(var i = 1; i <= 6; ++i)
+            {
+                var civilite = document.getElementById("civilite"+i).value;
+                var fonction = document.getElementById("fonction"+i).value;
+                var diplome = document.getElementById("diplome"+i).value;
+                var precision = document.getElementById("precision"+i).value;
+                var qualite = document.getElementById("qualite"+i).value;
+                var dated = document.getElementById("dated"+i).value;
+                var datef = document.getElementById("datef"+i).value;
+
+                var val;
+
+                switch(i)
+                {
+                    case 1:
+                    val = (civilite == "Madame" && fonction == "Directeur" && diplome == 19 && precision == "CAFDSF" && qualite == 6 && dated == "2020-07-08" && datef == "2020-07-22");
+                    break;
+                    
+                    case 2:
+                    val = (civilite == "Monsieur" && fonction == "Animateur" && diplome == 18 && precision == "CAFASF" && qualite == 6 && dated == "2020-07-08" && datef == "2020-07-22");
+                    break;
+
+                    case 3:
+                    val = (civilite == "Madame" && fonction == "Animateur" && diplome == 18 && precision == "CAFASF" && qualite == 1 && dated == "2020-07-08" && datef == "2020-07-22");
+                    break;
+
+                    case 4:
+                    val = (civilite == "Monsieur" && fonction == "Animateur" && diplome == 18 && precision == "CAFASF" && qualite == 5 && dated == "2020-07-08" && datef == "2020-07-22");
+                    break;
+
+                    case 5:
+                    val = (civilite == "Monsieur" && fonction == "Animateur" && diplome == 17 && precision == "-" && qualite == 4 && dated == "2020-07-08" && datef == "2020-07-22");
+                    break;
+
+                    case 6:
+                    val = (civilite == "Madame" && fonction == "Interv. Ext." && diplome == 19 && precision == "CAFDSF" && qualite == 6 && dated == "2020-07-14" && datef == "2020-07-15");
+                    break;
+                }
+
+                res = (res && val);
+            }
+            if(res) document.getElementById("resultat").innerHTML = "<strong>Lettre à trouver : X</strong>";
+            else document.getElementById("resultat").innerHTML = "<strong>Lettre à trouver : Tu dois d'abord remplir le tableau sans faire d'erreur</strong>";
+        }
+
+    </script>
+    
+    <h1>Déclarer sa fiche complémentaire</h1>
+
+    <p><strong>Vous devez remplir la fiche complémentaire du camp suivant : </strong><br/>
+    Gertrude est directrice du camp Scouts et Guides du 08/07/2020 au 22/07/2020 avec une qualification de directrice du Scoutisme Français <br/>
+    Jean est animateur et possède une qualification d'animateur du SF <br/>
+    Pierrette a fait un tech et est stagiaire BAFA <br/>
+    Jacques a seulement fait un APF <br/>
+    Kevin vient d'arriver et n'a pas pu faire de formation <br/>
+    Yvette est la mère de Pierrette mais c'est aussi la RG du groupe, elle vient que du 14/07/2020 au 15/07/2020 pour rendre visite. Elle est directrice SF à l'année.</p>
+
+    <table>
+        <tr>
+            <th>Civilité</th>
+            <th>Individu</th>
+            <th>Fonction</th>
+            <th>Diplôme</th>
+            <th>Précision Diplôme</th>
+            <th>Qualité</th>
+            <th>Début présence</th>
+            <th>Fin présence</th>
+            <th>Date de naissance</th>
+            <th>Lieu de naissance</th>
+        </tr>
+        
+        <tr> <!--1-->
+            <td>
+                <select id="civilite1" onchange="check()">
+                    <option>Choisir</option>
+                    <option>Monsieur</option>
+                    <option>Madame</option>
+                </select>
+            </td>
+            <td>Mme GERTRUDE TARTAMPION</td>
+            <td>
+                <select id="fonction1" onchange="check();">
+                    <option>Adjoint</option>
+                    <option>Animateur</option>
+                    <option>Autre</option>
+                    <option>Directeur</option>
+                    <option>Interv. Ext.</option>
+                </select>
+            </td>
+            <td>
+                <select id="diplome1" onchange="diplome(1);check();">
+                    <option selected="selected" value="1">Aff Soc Anim</option>
+                    <option value="2">Aff Soc Dir</option>
+                    <option value="3">BAFA assimilé</option>
+                    <option value="4">BAFD assimilé</option>
+                    <option value="5">Conv Coll Nat Anim</option>
+                    <option value="6">Educ Nat Anim</option>
+                    <option value="7">Educ Nat Dir</option>
+                    <option value="8">FPT Anim</option>
+                    <option value="9">FPT Dir</option>
+                    <option value="10">M Agric Anim</option>
+                    <option value="11">M Armées Anim</option>
+                    <option value="12">M Armées Dir</option>
+                    <option value="13">M Int Anim</option>
+                    <option value="14">M Justice Dir</option>
+                    <option value="15">MSJS Anim</option>
+                    <option value="16">MSJS Dir</option>
+                    <option value="17">Non diplomé</option>
+                    <option value="18">Scout Anim</option>
+                    <option value="19">Scout Dir</option>
+                </select>
+            </td>
+            <td><select id="precision1" onchange="check()"><option>-</option><option>CAFME</option><option>DEME</option></select></td>
+            <td>
+                <select id="qualite1" onchange="check()">
+                    <option value="1">Anim titulaire-Stagiaire BAFA</option>
+                    <option value="2">Dérogation</option>
+                    <option value="3">Dir titulaire-Stagiaire BAFD</option>
+                    <option value="4">Non qualifié</option>
+                    <option value="5">Stagiaire</option>
+                    <option selected="selected" value="6">Titulaire</option>
+                </select>
+            </td>
+            <td><input id="dated1" type="date" onchange="check()"/></td>
+            <td><input id="datef1" type="date" onchange="check()"/></td>
+            <td>28/02/1990</td>
+            <td>NANTES</td>
+        </tr>
+
+        <tr> <!--2-->
+            <td>
+                <select id="civilite2" onchange="check()">
+                    <option>Choisir</option>
+                    <option>Monsieur</option>
+                    <option>Madame</option>
+                </select>
+            </td>
+            <td>M. JEAN TY</td>
+            <td>
+                <select id="fonction2" onchange="check();">
+                    <option>Adjoint</option>
+                    <option>Animateur</option>
+                    <option>Autre</option>
+                    <option>Directeur</option>
+                    <option>Interv. Ext.</option>
+                </select>
+            </td>
+            <td>
+                <select id="diplome2" onchange="diplome(2);check();">
+                    <option selected="selected" value="1">Aff Soc Anim</option>
+                    <option value="2">Aff Soc Dir</option>
+                    <option value="3">BAFA assimilé</option>
+                    <option value="4">BAFD assimilé</option>
+                    <option value="5">Conv Coll Nat Anim</option>
+                    <option value="6">Educ Nat Anim</option>
+                    <option value="7">Educ Nat Dir</option>
+                    <option value="8">FPT Anim</option>
+                    <option value="9">FPT Dir</option>
+                    <option value="10">M Agric Anim</option>
+                    <option value="11">M Armées Anim</option>
+                    <option value="12">M Armées Dir</option>
+                    <option value="13">M Int Anim</option>
+                    <option value="14">M Justice Dir</option>
+                    <option value="15">MSJS Anim</option>
+                    <option value="16">MSJS Dir</option>
+                    <option value="17">Non diplomé</option>
+                    <option value="18">Scout Anim</option>
+                    <option value="19">Scout Dir</option>
+                </select>
+            </td>
+            <td><select id="precision2" onchange="check()"><option>-</option><option>CAFME</option><option>DEME</option></select></td>
+            <td>
+                <select id="qualite2" onchange="check()">
+                    <option value="1">Anim titulaire-Stagiaire BAFA</option>
+                    <option value="2">Dérogation</option>
+                    <option value="3">Dir titulaire-Stagiaire BAFD</option>
+                    <option value="4">Non qualifié</option>
+                    <option value="5">Stagiaire</option>
+                    <option selected="selected" value="6">Titulaire</option>
+                </select>
+            </td>
+            <td><input id="dated2" type="date" onchange="check()"/></td>
+            <td><input id="datef2" type="date" onchange="check()"/></td>
+            <td>20/01/1999</td>
+            <td>LA ROCHE SUR YON</td>
+        </tr>
+
+        <tr> <!--3-->
+            <td>
+                <select id="civilite3" onchange="check()">
+                    <option>Choisir</option>
+                    <option>Monsieur</option>
+                    <option>Madame</option>
+                </select>
+            </td>
+            <td>Mme PIERRETTE DUJARDIN</td>
+            <td>
+                <select id="fonction3" onchange="check();">
+                    <option>Adjoint</option>
+                    <option>Animateur</option>
+                    <option>Autre</option>
+                    <option>Directeur</option>
+                    <option>Interv. Ext.</option>
+                </select>
+            </td>
+            <td>
+                <select id="diplome3" onchange="diplome(3);check();">
+                    <option selected="selected" value="1">Aff Soc Anim</option>
+                    <option value="2">Aff Soc Dir</option>
+                    <option value="3">BAFA assimilé</option>
+                    <option value="4">BAFD assimilé</option>
+                    <option value="5">Conv Coll Nat Anim</option>
+                    <option value="6">Educ Nat Anim</option>
+                    <option value="7">Educ Nat Dir</option>
+                    <option value="8">FPT Anim</option>
+                    <option value="9">FPT Dir</option>
+                    <option value="10">M Agric Anim</option>
+                    <option value="11">M Armées Anim</option>
+                    <option value="12">M Armées Dir</option>
+                    <option value="13">M Int Anim</option>
+                    <option value="14">M Justice Dir</option>
+                    <option value="15">MSJS Anim</option>
+                    <option value="16">MSJS Dir</option>
+                    <option value="17">Non diplomé</option>
+                    <option value="18">Scout Anim</option>
+                    <option value="19">Scout Dir</option>
+                </select>
+            </td>
+            <td><select id="precision3" onchange="check()"><option>-</option><option>CAFME</option><option>DEME</option></select></td>
+            <td>
+                <select id="qualite3" onchange="check()">
+                    <option value="1">Anim titulaire-Stagiaire BAFA</option>
+                    <option value="2">Dérogation</option>
+                    <option value="3">Dir titulaire-Stagiaire BAFD</option>
+                    <option value="4">Non qualifié</option>
+                    <option value="5">Stagiaire</option>
+                    <option selected="selected" value="6">Titulaire</option>
+                </select>
+            </td>
+            <td><input id="dated3" type="date" onchange="check()"/></td>
+            <td><input id="datef3" type="date" onchange="check()"/></td>
+            <td>20/01/2001</td>
+            <td>RENNES</td>
+        </tr>
+
+        <tr> <!--4-->
+            <td>
+                <select id="civilite4" onchange="check()">
+                    <option>Choisir</option>
+                    <option>Monsieur</option>
+                    <option>Madame</option>
+                </select>
+            </td>
+            <td>M. JACQUES PETIT</td>
+            <td>
+                <select id="fonction4" onchange="check();">
+                    <option>Adjoint</option>
+                    <option>Animateur</option>
+                    <option>Autre</option>
+                    <option>Directeur</option>
+                    <option>Interv. Ext.</option>
+                </select>
+            </td>
+            <td>
+                <select id="diplome4" onchange="diplome(4);check();">
+                    <option selected="selected" value="1">Aff Soc Anim</option>
+                    <option value="2">Aff Soc Dir</option>
+                    <option value="3">BAFA assimilé</option>
+                    <option value="4">BAFD assimilé</option>
+                    <option value="5">Conv Coll Nat Anim</option>
+                    <option value="6">Educ Nat Anim</option>
+                    <option value="7">Educ Nat Dir</option>
+                    <option value="8">FPT Anim</option>
+                    <option value="9">FPT Dir</option>
+                    <option value="10">M Agric Anim</option>
+                    <option value="11">M Armées Anim</option>
+                    <option value="12">M Armées Dir</option>
+                    <option value="13">M Int Anim</option>
+                    <option value="14">M Justice Dir</option>
+                    <option value="15">MSJS Anim</option>
+                    <option value="16">MSJS Dir</option>
+                    <option value="17">Non diplomé</option>
+                    <option value="18">Scout Anim</option>
+                    <option value="19">Scout Dir</option>
+                </select>
+            </td>
+            <td><select id="precision4" onchange="check()"><option>-</option><option>CAFME</option><option>DEME</option></select></td>
+            <td>
+                <select id="qualite4" onchange="check()">
+                    <option value="1">Anim titulaire-Stagiaire BAFA</option>
+                    <option value="2">Dérogation</option>
+                    <option value="3">Dir titulaire-Stagiaire BAFD</option>
+                    <option value="4">Non qualifié</option>
+                    <option value="5">Stagiaire</option>
+                    <option selected="selected" value="6">Titulaire</option>
+                </select>
+            </td>
+            <td><input id="dated4" type="date" onchange="check()"/></td>
+            <td><input id="datef4" type="date" onchange="check()"/></td>
+            <td>10/05/2001</td>
+            <td>RENNES</td>
+        </tr>
+
+        <tr> <!--5-->
+            <td>
+                <select id="civilite5" onchange="check()">
+                    <option>Choisir</option>
+                    <option>Monsieur</option>
+                    <option>Madame</option>
+                </select>
+            </td>
+            <td>M. KEVIN RADIN</td>
+            <td>
+                <select id="fonction5" onchange="check();">
+                    <option>Adjoint</option>
+                    <option>Animateur</option>
+                    <option>Autre</option>
+                    <option>Directeur</option>
+                    <option>Interv. Ext.</option>
+                </select>
+            </td>
+            <td>
+                <select id="diplome5" onchange="diplome(5);check();">
+                    <option selected="selected" value="1">Aff Soc Anim</option>
+                    <option value="2">Aff Soc Dir</option>
+                    <option value="3">BAFA assimilé</option>
+                    <option value="4">BAFD assimilé</option>
+                    <option value="5">Conv Coll Nat Anim</option>
+                    <option value="6">Educ Nat Anim</option>
+                    <option value="7">Educ Nat Dir</option>
+                    <option value="8">FPT Anim</option>
+                    <option value="9">FPT Dir</option>
+                    <option value="10">M Agric Anim</option>
+                    <option value="11">M Armées Anim</option>
+                    <option value="12">M Armées Dir</option>
+                    <option value="13">M Int Anim</option>
+                    <option value="14">M Justice Dir</option>
+                    <option value="15">MSJS Anim</option>
+                    <option value="16">MSJS Dir</option>
+                    <option value="17">Non diplomé</option>
+                    <option value="18">Scout Anim</option>
+                    <option value="19">Scout Dir</option>
+                </select>
+            </td>
+            <td><select id="precision5" onchange="check()"><option>-</option><option>CAFME</option><option>DEME</option></select></td>
+            <td>
+                <select id="qualite5" onchange="check()">
+                    <option value="1">Anim titulaire-Stagiaire BAFA</option>
+                    <option value="2">Dérogation</option>
+                    <option value="3">Dir titulaire-Stagiaire BAFD</option>
+                    <option value="4">Non qualifié</option>
+                    <option value="5">Stagiaire</option>
+                    <option selected="selected" value="6">Titulaire</option>
+                </select>
+            </td>
+            <td><input id="dated5" type="date" onchange="check()"/></td>
+            <td><input id="datef5" type="date" onchange="check()"/></td>
+            <td>06/10/1997</td>
+            <td>BOBIGNY</td>
+        </tr>
+
+        <tr> <!--6-->
+            <td>
+                <select id="civilite6" onchange="check()">
+                    <option>Choisir</option>
+                    <option>Monsieur</option>
+                    <option>Madame</option>
+                </select>
+            </td>
+            <td>MME YVETTE DUJARDIN</td>
+            <td>
+                <select id="fonction6" onchange="check();">
+                    <option>Adjoint</option>
+                    <option>Animateur</option>
+                    <option>Autre</option>
+                    <option>Directeur</option>
+                    <option>Interv. Ext.</option>
+                </select>
+            </td>
+            <td>
+                <select id="diplome6" onchange="diplome(6);check();">
+                    <option selected="selected" value="1">Aff Soc Anim</option>
+                    <option value="2">Aff Soc Dir</option>
+                    <option value="3">BAFA assimilé</option>
+                    <option value="4">BAFD assimilé</option>
+                    <option value="5">Conv Coll Nat Anim</option>
+                    <option value="6">Educ Nat Anim</option>
+                    <option value="7">Educ Nat Dir</option>
+                    <option value="8">FPT Anim</option>
+                    <option value="9">FPT Dir</option>
+                    <option value="10">M Agric Anim</option>
+                    <option value="11">M Armées Anim</option>
+                    <option value="12">M Armées Dir</option>
+                    <option value="13">M Int Anim</option>
+                    <option value="14">M Justice Dir</option>
+                    <option value="15">MSJS Anim</option>
+                    <option value="16">MSJS Dir</option>
+                    <option value="17">Non diplomé</option>
+                    <option value="18">Scout Anim</option>
+                    <option value="19">Scout Dir</option>
+                </select>
+            </td>
+            <td><select id="precision6" onchange="check()"><option>-</option><option>CAFME</option><option>DEME</option></select></td>
+            <td>
+                <select id="qualite6" onchange="check()">
+                    <option value="1">Anim titulaire-Stagiaire BAFA</option>
+                    <option value="2">Dérogation</option>
+                    <option value="3">Dir titulaire-Stagiaire BAFD</option>
+                    <option value="4">Non qualifié</option>
+                    <option value="5">Stagiaire</option>
+                    <option selected="selected" value="6">Titulaire</option>
+                </select>
+            </td>
+            <td><input id="dated6" type="date" onchange="check()"/></td>
+            <td><input id="datef6" type="date" onchange="check()"/></td>
+            <td>31/12/1950</td>
+            <td>RENNES</td>
+        </tr>
+    </table>
+
+    <p id="resultat"></p>
+
+    <form method="post">
+        <textarea name="reponse"></textarea>
+        <input type="submit"/>
+    </form>
+
 }
