@@ -127,15 +127,12 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
   def upload_enigme_e() = upload_enigme("rep_enigme_e", (d, f) => views.html.enigme_e(d, f))
 
   def validate_enigme(num_adh: String, enigme: String) = Sessioned { implicit request =>
-      println(s"validate enigme ${enigme}_ok")
       storage.setEnigmeResponseOk(num_adh, enigme)
       Redirect(routes.HomeController.listResults)
   }
 
   def listResults = Sessioned { implicit request =>
     val dirs: List[Directeur] = storage.getAll
-    println(dirs)
-
     Ok(views.html.list_results(dirs))
   }
 }
