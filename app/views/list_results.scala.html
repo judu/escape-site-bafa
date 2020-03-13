@@ -1,0 +1,113 @@
+@(directeurs: List[models.Directeur])(implicit messages: Messages)
+
+
+@main("Progression") {
+<div class="container-fluid">
+   <div class="row justify-content-lg-center" style="margin-bottom: 20px">
+      <table class="table table-striped table-hover">
+         <thead>
+            <tr>
+               <th>Numéro</th>
+               <th>Nom</th>
+               <th>rep_enigme_a</th>
+               <th>rep_enigme_b</th>
+               <th>rep_enigme_c</th>
+               <th>rep_enigme_d</th>
+               <th>rep_enigme_e</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>
+                  0000000
+               </td>
+               <td>
+                  Bonne réponse
+               </td>
+            </tr>
+            @for(dir <- directeurs) {
+            <tr>
+               <td>@{dir.num_adh}</td>
+               <td>@{dir.nom}</td>
+               <td>
+                  @if(dir.rep_enigme_a.isDefined) {
+                     @{dir.rep_enigme_a.getOrElse("")}
+                  @if(dir.enigme_a_ok) {
+                  ✔️
+                  } else {
+                     @b4.inline.form(action =
+                     routes.HomeController.validate_enigme(dir.num_adh, "enigme_a")) { implicit vfc =>
+                     @b4.submit(Symbol("class") -> "btn btn-primary") { ✔️ }
+                     }
+                  }
+                  } else {
+                  <span></span>
+                  }
+               </td>
+               <td>
+                  @{dir.rep_enigme_b.getOrElse("")}
+                  @if(dir.enigme_b_ok) {
+                  ✔️
+                  } else {
+                  @if(dir.rep_enigme_b.isDefined) {
+                  @b4.inline.form(action =
+                  routes.HomeController.validate_enigme(dir.num_adh, "enigme_b")) { implicit vfc =>
+                  @b4.submit(Symbol("class") -> "btn btn-primary") { ✔️ }
+                  }
+                  } else {
+                  <span></span>
+                  }
+                  }
+               </td>
+               <td>
+                  @{dir.rep_enigme_c.getOrElse("")}
+                  @if(dir.enigme_c_ok) {
+                  ✔️
+                  } else {
+                  @if(dir.rep_enigme_c.isDefined) {
+                  @b4.inline.form(action =
+                  routes.HomeController.validate_enigme(dir.num_adh, "enigme_c")) { implicit vfc =>
+                  @b4.submit(Symbol("class") -> "btn btn-primary") { ✔️ }
+                  }
+                  } else {
+                  <span></span>
+                  }
+                  }
+               </td>
+               <td>
+                  @{dir.rep_enigme_d.getOrElse("")}
+                  @if(dir.enigme_d_ok) {
+                  ✔️
+                  } else {
+                  @if(dir.rep_enigme_d.isDefined) {
+                  @b4.inline.form(action =
+                  routes.HomeController.validate_enigme(dir.num_adh, "enigme_d")) { implicit vfc =>
+                  @b4.submit(Symbol("class") -> "btn btn-primary") { ✔️ }
+                  }
+                  } else {
+                  <span></span>
+                  }
+                  }
+               </td>
+               <td>
+                  @{dir.rep_enigme_e.getOrElse("")}
+                  @if(dir.enigme_e_ok) {
+                  ✔️
+                  } else {
+                  @if(dir.rep_enigme_e.isDefined) {
+                  @b4.inline.form(action =
+                  routes.HomeController.validate_enigme(dir.num_adh, "enigme_e")) { implicit vfc =>
+                  @b4.submit(Symbol("class") -> "btn btn-primary") { ✔️ }
+                  }
+                  } else {
+                  <span></span>
+                  }
+                  }
+               </td>
+            </tr>
+            }
+         </tbody>
+      </table>
+   </div>
+</div>
+}

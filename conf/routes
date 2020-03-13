@@ -18,5 +18,8 @@ POST    /enigmes/4vgijd7t           controllers.HomeController.upload_enigme_c
 POST    /enigmes/d4ujtnkr           controllers.HomeController.upload_enigme_d
 POST    /enigmes/3xoduh3x           controllers.HomeController.upload_enigme_e
 
+GET     /fnwopguros9yf7qvisv/admin  controllers.HomeController.listResults
+POST    /gfxbstckcpbhe7m93od/validate/:numadh/:enigme  controllers.HomeController.validate_enigme(numadh: String, enigme: String)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

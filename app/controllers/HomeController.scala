@@ -7,10 +7,12 @@ import play.api.data.Forms._
 import play.api.data.validation.Constraints._
 import play.api.mvc._
 import play.api.i18n._
+import play.api.Logger
 
 import models._
 
 case class DirNum(num_adh: String)
+case class Reponse(reponse: String)
 
 /**
  * This controller creates an `Sessioned` to handle HTTP requests to the
@@ -19,11 +21,18 @@ case class DirNum(num_adh: String)
 @Singleton
 class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerComponents, actionBuilder: DefaultActionBuilder, langs: Langs) extends BaseController {
 
+  val logger: Logger = Logger("main")
+
   override def controllerComponents = cc
 
   implicit val lang: Lang = langs.availables.head
   implicit val messages: Messages = MessagesImpl(lang, messagesApi)
 
+  val repForm = Form(
+    mapping(
+      "reponse" -> text
+      )(Reponse.apply)(Reponse.unapply)
+    )
 
   val dirForm = Form(
     mapping(
@@ -78,55 +87,55 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
   }
 
   def page_enigme_a() = Sessioned { implicit request =>
-    Ok(views.html.enigme_a(request.dir))
-  }
-
-  def upload_enigme_a() = Sessioned(parse.tolerantText) { implicit request =>
-    val txt = request.body
-    storage.setEnigmeResponse(request.dir.num_adh, "rep_enigme_a", txt)
-    Ok(views.html.continuez())
+    Ok(views.html.enigme_a(request.dir, repForm))
   }
 
   def page_enigme_b() = Sessioned { implicit request =>
-    Ok(views.html.enigme_b(request.dir))
-  }
-
-  def upload_enigme_b() = Sessioned(parse.tolerantText) { implicit request =>
-    val txt = request.body
-    storage.setEnigmeResponse(request.dir.num_adh, "rep_enigme_b", txt)
-    Ok(views.html.continuez())
+    Ok(views.html.enigme_b(request.dir, repForm))
   }
 
   def page_enigme_c() = Sessioned { implicit request =>
-    Ok(views.html.enigme_c(request.dir))
+    Ok(views.html.enigme_c(request.dir, repForm))
   }
-
-  def upload_enigme_c() = Sessioned(parse.tolerantText) { implicit request =>
-    val txt = request.body
-    storage.setEnigmeResponse(request.dir.num_adh, "rep_enigme_c", txt)
-    Ok(views.html.continuez())
-  }
-
 
   def page_enigme_d() = Sessioned { implicit request =>
-    Ok(views.html.enigme_d(request.dir))
+    Ok(views.html.enigme_d(request.dir, repForm))
   }
-
-  def upload_enigme_d() = Sessioned(parse.tolerantText) { implicit request =>
-    val txt = request.body
-    storage.setEnigmeResponse(request.dir.num_adh, "rep_enigme_d", txt)
-    Ok(views.html.continuez())
-  }
-
 
   def page_enigme_e() = Sessioned { implicit request =>
-    Ok(views.html.enigme_e(request.dir))
+    Ok(views.html.enigme_e(request.dir, repForm))
   }
 
-  def upload_enigme_e() = Sessioned(parse.tolerantText) { implicit request =>
-    val txt = request.body
-    storage.setEnigmeResponse(request.dir.num_adh, "rep_enigme_e", txt)
-    Ok(views.html.continuez())
+  def upload_enigme(enigme: String, p: (Directeur, Form[Reponse]) => play.twirl.api.Html) = Sessioned { implicit request =>
+    repForm.bindFromRequest.fold(formWithErrors => {
+      BadRequest(p(request.dir, formWithErrors))
+    },
+    repData => {
+      storage.setEnigmeResponse(request.dir.num_adh, enigme, repData.reponse)
+      Ok(views.html.continuez())
+    })
   }
 
+  def upload_enigme_a() = upload_enigme("rep_enigme_a", (d, f) => views.html.enigme_a(d, f))
+
+  def upload_enigme_b() = upload_enigme("rep_enigme_b", (d, f) => views.html.enigme_b(d, f))
+
+  def upload_enigme_c() = upload_enigme("rep_enigme_c", (d, f) => views.html.enigme_c(d, f))
+
+  def upload_enigme_d() = upload_enigme("rep_enigme_d", (d, f) => views.html.enigme_d(d, f))
+
+  def upload_enigme_e() = upload_enigme("rep_enigme_e", (d, f) => views.html.enigme_e(d, f))
+
+  def validate_enigme(num_adh: String, enigme: String) = Sessioned { implicit request =>
+      println(s"validate enigme ${enigme}_ok")
+      storage.setEnigmeResponseOk(num_adh, enigme)
+      Redirect(routes.HomeController.listResults)
+  }
+
+  def listResults = Sessioned { implicit request =>
+    val dirs: List[Directeur] = storage.getAll
+    println(dirs)
+
+    Ok(views.html.list_results(dirs))
+  }
 }
