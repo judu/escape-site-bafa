@@ -1,0 +1,9 @@
+.lien-accueil
+{
+    padding:5px;
+    color:black;
+    text-decoration:none;
+    border:2px solid black;
+    border-radius: 10px 100px / 120px;
+    display:inline-block;
+}
