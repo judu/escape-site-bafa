@@ -2,14 +2,28 @@
 
 @main("Une énigme", directeur.nom) {
 
-    <h1></h1>
+<div class="row justify-content-md-center" style="margin: 30px">
+    <h4>SCOUT TOUJOURS…&nbsp;?</h4>
+</div>
 
-    <p>Ecris je suis prêt quand tu es prêt. Nous devons attendre tout le monde pour cette étape ;)</p>
-
-       <form method="post">
-        <textarea name="reponse"></textarea>
-        <input type="submit"/>
-    </form>
-
-
+    @if(!directeur.enigme_d_ok) {
+    <div class="row justify-content-lg-center">
+    @b4.vertical.form(action = routes.HomeController.upload_enigme_d()) { implicit vfc =>
+    <div class="form-group" id="reponse_field">
+       <label for="reponse">Ta réponse @if(directeur.rep_enigme_d.isDefined) { est en
+          cours de validation ⏱}</label>
+       <textarea id="reponse" name="reponse" class="form-control">@if(directeur.rep_enigme_d.isDefined) {@{directeur.rep_enigme_d.get}}</textarea>
+    </div>
+    @b4.submit(Symbol("class") -> "btn btn-primary") { Envoyer }
+    }
+    </div>
+    } else {
+    <div class="alert alert-success">
+       <h4>Tu es prêt·e&nbsp;?</h4>
+       <p>Bah c'est cool.</p>
+       <p>Voici un bout de texte qu'il faudra mettre en commun avec les autres 😘&nbsp;:</p>
+       <hr/>
+       <p><i>«&nbsp;@{directeur.piece_of_code}&nbsp;»</i></p>
+    </div>
+    }
 }
