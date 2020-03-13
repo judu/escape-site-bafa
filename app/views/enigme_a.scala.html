@@ -1,11 +1,34 @@
-@(dirData: Directeur, repform: Form[controllers.Reponse])(implicit messages: Messages)
+@(directeur: Directeur, repform: Form[controllers.Reponse])(implicit messages: Messages)
 
-@main("Bienvenue à la formation !") {
-    <form method="post">
-        <p><strong>Fyec bofoxoj no "domr"? m'ocd lsox, zboxoj-ox vk zbowsèbo voddbo.</strong></p>
-        <textarea name="reponse"></textarea><br/>
-        <input type="submit"/>
-    </form>
+@main("Une énigme", directeur.nom) {
+<div class="row justify-content-md-center" style="margin: 30px">
+<h4 class="col-sm">Toi qui t'y connais, sauras-tu décoder ceci&nbsp;? Ou ne parleras-tu qu'en présence de ton… 😇</h4>
+</div>
+<div class="alert alert-primary">
+<p><strong>Fyec bofoxoj no "domr"? m'ocd lsox, zboxoj-ox vk zbowsèbo voddbo.</strong></p>
+</div>
 
-    @if(@directeur.enigme_a_ok) {}
+    @if(!directeur.enigme_a_ok) {
+    <div class="row justify-content-lg-center">
+    @b4.vertical.form(action = routes.HomeController.upload_enigme_a()) { implicit vfc =>
+    <div class="form-group" id="reponse_field">
+       <label for="reponse">Ta réponse @if(directeur.rep_enigme_a.isDefined) { est en
+          cours de validation ⏱}</label>
+       <textarea id="reponse" name="reponse" class="form-control">@if(directeur.rep_enigme_a.isDefined) {@{directeur.rep_enigme_a.get}}</textarea>
+    </div>
+    @b4.submit(Symbol("class") -> "btn btn-primary") { Envoyer }
+    }
+    </div>
+    } else {
+    <div class="alert alert-success">
+       <h4>Bonne réponse !</h2>
+       <p>Tu as gagné la lettre <b style="font-family: serif">I</b></p>
+       <p>Bien sûr, avant de partir en camp, il est de bon ton de se former&nbsp;!</p>
+    </div>
+    }
+
+    @if(directeur.enigme_a_ok) {
+    } else {
+    <p></p>
+    }
 }

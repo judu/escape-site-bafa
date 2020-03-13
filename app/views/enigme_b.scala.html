@@ -1,6 +1,6 @@
-@(dirData: Directeur, repform: Form[controllers.Reponse])(implicit messages: Messages)
+@(directeur: Directeur, repform: Form[controllers.Reponse])(implicit messages: Messages)
 
-@main("Bienvenue à la formation !") {
+@main("Une énigme", directeur.nom) {
 
     <script>
         function diplome(val)
@@ -54,7 +54,7 @@
                     case 1:
                     val = (civilite == "Madame" && fonction == "Directeur" && diplome == 19 && precision == "CAFDSF" && qualite == 6 && dated == "2020-07-08" && datef == "2020-07-22");
                     break;
-                    
+
                     case 2:
                     val = (civilite == "Monsieur" && fonction == "Animateur" && diplome == 18 && precision == "CAFASF" && qualite == 6 && dated == "2020-07-08" && datef == "2020-07-22");
                     break;
@@ -72,7 +72,7 @@
                     break;
 
                     case 6:
-                    val = (civilite == "Madame" && fonction == "Interv. Ext." && diplome == 19 && precision == "CAFDSF" && qualite == 6 && dated == "2020-07-14" && datef == "2020-07-15");
+                    val = (civilite == "Madame" && (fonction == "Interv. Ext." || fonction === "Autre") && diplome == 17 && precision == "-" && qualite == 4 && dated == "2020-07-14" && datef == "2020-07-15");
                     break;
                 }
 
@@ -83,18 +83,25 @@
         }
 
     </script>
-    
-    <h1>Déclarer sa fiche complémentaire</h1>
 
-    <p><strong>Vous devez remplir la fiche complémentaire du camp suivant : </strong><br/>
-    Gertrude est directrice du camp Scouts et Guides du 08/07/2020 au 22/07/2020 avec une qualification de directrice du Scoutisme Français <br/>
-    Jean est animateur et possède une qualification d'animateur du SF <br/>
-    Pierrette a fait un tech et est stagiaire BAFA <br/>
-    Jacques a seulement fait un APF <br/>
-    Kevin vient d'arriver et n'a pas pu faire de formation <br/>
-    Yvette est la mère de Pierrette mais c'est aussi la RG du groupe, elle vient que du 14/07/2020 au 15/07/2020 pour rendre visite. Elle est directrice SF à l'année.</p>
+    <div class="container-fluid">
+       <div class="row justify-content-lg-center">
+          <h1>Déclarer sa fiche complémentaire</h1>
 
-    <table>
+          <p>
+             <strong>Vous devez remplir la fiche complémentaire du camp suivant : </strong><br/>
+             Gertrude est directrice du camp Scouts et Guides du 08/07/2020 au 22/07/2020 avec une qualification de directrice du Scoutisme Français <br/>
+             Jean est animateur et possède une qualification d'animateur du SF <br/>
+             Pierrette a fait un tech et est stagiaire BAFA <br/>
+             Jacques a seulement fait un APF <br/>
+             Kevin vient d'arriver et n'a pas pu faire de formation <br/>
+             Yvette est la mère de Pierrette mais c'est aussi la RG du groupe, elle vient
+             que du 14/07/2020 au 15/07/2020 pour rendre visite. Elle est directrice SF à
+             l'année, mais pas sur le camp
+          </p>
+       </div>
+
+    <table class="table table-striped table-hover">
         <tr>
             <th>Civilité</th>
             <th>Individu</th>
@@ -107,13 +114,13 @@
             <th>Date de naissance</th>
             <th>Lieu de naissance</th>
         </tr>
-        
+
         <tr> <!--1-->
             <td>
                 <select id="civilite1" onchange="check()">
                     <option>Choisir</option>
                     <option>Monsieur</option>
-                    <option>Madame</option>
+                    <option selected>Madame</option>
                 </select>
             </td>
             <td>Mme GERTRUDE TARTAMPION</td>
@@ -160,8 +167,8 @@
                     <option selected="selected" value="6">Titulaire</option>
                 </select>
             </td>
-            <td><input id="dated1" type="date" onchange="check()"/></td>
-            <td><input id="datef1" type="date" onchange="check()"/></td>
+            <td><input id="dated1" type="date" pattern="dd/MM/yyyy" onchange="check()"/></td>
+            <td><input id="datef1" type="date" pattern="dd/MM/yyyy" onchange="check()"/></td>
             <td>28/02/1990</td>
             <td>NANTES</td>
         </tr>
@@ -170,7 +177,7 @@
             <td>
                 <select id="civilite2" onchange="check()">
                     <option>Choisir</option>
-                    <option>Monsieur</option>
+                    <option selected>Monsieur</option>
                     <option>Madame</option>
                 </select>
             </td>
@@ -229,7 +236,7 @@
                 <select id="civilite3" onchange="check()">
                     <option>Choisir</option>
                     <option>Monsieur</option>
-                    <option>Madame</option>
+                    <option selected>Madame</option>
                 </select>
             </td>
             <td>Mme PIERRETTE DUJARDIN</td>
@@ -286,7 +293,7 @@
             <td>
                 <select id="civilite4" onchange="check()">
                     <option>Choisir</option>
-                    <option>Monsieur</option>
+                    <option selected>Monsieur</option>
                     <option>Madame</option>
                 </select>
             </td>
@@ -344,7 +351,7 @@
             <td>
                 <select id="civilite5" onchange="check()">
                     <option>Choisir</option>
-                    <option>Monsieur</option>
+                    <option selected>Monsieur</option>
                     <option>Madame</option>
                 </select>
             </td>
@@ -403,7 +410,7 @@
                 <select id="civilite6" onchange="check()">
                     <option>Choisir</option>
                     <option>Monsieur</option>
-                    <option>Madame</option>
+                    <option selected>Madame</option>
                 </select>
             </td>
             <td>MME YVETTE DUJARDIN</td>
@@ -457,11 +464,26 @@
         </tr>
     </table>
 
-    <p id="resultat"></p>
+    <div class="row justify-content-lg-center">
+    <p class="col-md" id="resultat"></p>
+    </div>
 
-    <form method="post">
-        <textarea name="reponse"></textarea>
-        <input type="submit"/>
-    </form>
-
+    @if(!directeur.enigme_b_ok) {
+    <div class="row justify-content-lg-center">
+    @b4.vertical.form(action = routes.HomeController.upload_enigme_b()) { implicit vfc =>
+    <div class="form-group" id="reponse_field">
+       <label for="reponse">Ta réponse</label>
+       <textarea id="reponse" name="reponse" class="form-control">@if(directeur.rep_enigme_b.isDefined) {@{directeur.rep_enigme_b.get}}</textarea>
+    </div>
+    @b4.submit(Symbol("class") -> "btn btn-primary") { Envoyer }
+    }
+    </div>
+    } else {
+    <div class="alert alert-success">
+       <h4>Bonne réponse !</h2>
+       <p>(Ta réponse: <b style="font-family:serif">@{directeur.rep_enigme_b}</b>)</p>
+       <p>Cette étape est très importante, car de cette déclaration dépendra le BAFA de
+          tes stagiaires&nbsp;!</p>
+    </div>
+    }
 }

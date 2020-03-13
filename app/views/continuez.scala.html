@@ -1,6 +1,6 @@
-@()
+@(directeur: Directeur)
 
-@main("Continuez pendant qu'on valide") {
+@main("Continuez pendant qu'on valide", directeur.nom) {
 <h1>On va valider la réponse, regardez ce que vous pouvez faire d'autre
    <a href="@routes.HomeController.index()">sur l'accueil</a>
 }

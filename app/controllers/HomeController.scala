@@ -82,8 +82,7 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
    * a path of `/`.
    */
   def index() = Sessioned { implicit request =>
-
-    Ok(views.html.index())
+    Ok(views.html.index(request.dir))
   }
 
   def page_enigme_a() = Sessioned { implicit request =>
@@ -106,25 +105,25 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
     Ok(views.html.enigme_e(request.dir, repForm))
   }
 
-  def upload_enigme(enigme: String, p: (Directeur, Form[Reponse]) => play.twirl.api.Html) = Sessioned { implicit request =>
+  def upload_enigme(enigme: String, p: (Directeur, Form[Reponse]) => play.twirl.api.Html, r: play.api.mvc.Call) = Sessioned { implicit request =>
     repForm.bindFromRequest.fold(formWithErrors => {
       BadRequest(p(request.dir, formWithErrors))
     },
     repData => {
       storage.setEnigmeResponse(request.dir.num_adh, enigme, repData.reponse)
-      Ok(views.html.continuez())
+      Redirect(r)
     })
   }
 
-  def upload_enigme_a() = upload_enigme("rep_enigme_a", (d, f) => views.html.enigme_a(d, f))
+  def upload_enigme_a() = upload_enigme("rep_enigme_a", (d, f) => views.html.enigme_a(d, f), routes.HomeController.page_enigme_a)
 
-  def upload_enigme_b() = upload_enigme("rep_enigme_b", (d, f) => views.html.enigme_b(d, f))
+  def upload_enigme_b() = upload_enigme("rep_enigme_b", (d, f) => views.html.enigme_b(d, f), routes.HomeController.page_enigme_b)
 
-  def upload_enigme_c() = upload_enigme("rep_enigme_c", (d, f) => views.html.enigme_c(d, f))
+  def upload_enigme_c() = upload_enigme("rep_enigme_c", (d, f) => views.html.enigme_c(d, f), routes.HomeController.page_enigme_c)
 
-  def upload_enigme_d() = upload_enigme("rep_enigme_d", (d, f) => views.html.enigme_d(d, f))
+  def upload_enigme_d() = upload_enigme("rep_enigme_d", (d, f) => views.html.enigme_d(d, f), routes.HomeController.page_enigme_d)
 
-  def upload_enigme_e() = upload_enigme("rep_enigme_e", (d, f) => views.html.enigme_e(d, f))
+  def upload_enigme_e() = upload_enigme("rep_enigme_e", (d, f) => views.html.enigme_e(d, f), routes.HomeController.page_enigme_e)
 
   def validate_enigme(num_adh: String, enigme: String) = Sessioned { implicit request =>
       storage.setEnigmeResponseOk(num_adh, enigme)
@@ -133,6 +132,6 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
 
   def listResults = Sessioned { implicit request =>
     val dirs: List[Directeur] = storage.getAll
-    Ok(views.html.list_results(dirs))
+    Ok(views.html.list_results(request.dir, dirs))
   }
 }

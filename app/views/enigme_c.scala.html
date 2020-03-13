@@ -1,4 +1,4 @@
-@(dirData: Directeur, repform: Form[controllers.Reponse])(implicit messages: Messages)
+@(directeur: Directeur, repform: Form[controllers.Reponse])(implicit messages: Messages)
 
-@main("Bienvenue à la formation !") {
+@main("Une énigme", directeur.nom) {
 }
