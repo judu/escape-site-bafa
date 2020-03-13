@@ -51,11 +51,10 @@ class DirecteurRepository @Inject()(dbapi: DBApi) {
     }
   }
 
-
   def getDirecteur(num: String): Option[Directeur] = db.withConnection { implicit connection =>
     SQL("""SELECT num_adh , nom, piece_of_code ,rep_enigme_a ,rep_enigme_b ,rep_enigme_c
     ,rep_enigme_d ,rep_enigme_e ,enigme_a_ok ,enigme_b_ok ,enigme_c_ok ,enigme_d_ok ,enigme_e_ok
-    FROM sgdf_users
+    FROM sgdf_directeurs
     WHERE num_adh = {num_adh}""")
       .on(Symbol("num_adh") -> num)
       .as(parser.*)
@@ -63,13 +62,13 @@ class DirecteurRepository @Inject()(dbapi: DBApi) {
   }
 
   def setEnigmeResponse(num: String, name: String, reponse: String) = db.withConnection { implicit connection =>
-    SQL(s"UPDATE sgdf_users SET ${name} = {response} WHERE num_adh = {num}")
+    SQL(s"UPDATE sgdf_directeurs SET ${name} = {response} WHERE num_adh = {num}")
       .on(Symbol("response") -> reponse, Symbol("num") -> num)
       .execute()
   }
 
   def setEnigmeResponseOk(num: String, name: String) = db.withConnection { implicit connection =>
-    SQL(s"UPDATE sgdf_users SET ${name} = true WHERE num_adh = {num}")
+    SQL(s"UPDATE sgdf_directeurs SET ${name} = true WHERE num_adh = {num}")
       .on(Symbol("num") -> num)
       .execute()
   }

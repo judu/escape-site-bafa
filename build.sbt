@@ -12,7 +12,8 @@ libraryDependencies ++= Seq(
    ws,
    guice,
    "org.playframework.anorm" %% "anorm" % "2.6.5",
-   "org.postgresql" % "postgresql" % "42.2.9"
+   "org.postgresql" % "postgresql" % "42.2.9",
+   "com.adrianhurt" %% "play-bootstrap" % "1.5.1-P27-B4",
 )
 
 // Adds additional packages into Twirl

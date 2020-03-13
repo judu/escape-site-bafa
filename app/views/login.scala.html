@@ -1,7 +1,18 @@
 @(userform: Form[controllers.DirNum])(implicit messages: Messages)
 
 @main("Quel est ton numéro d'adhérent ?") {
-@helper.form(action = routes.HomeController.doLogin()) {
-@helper.inputText(userform("num_adh"))
+
+<div class="container">
+<div class="row justify-content-md-center" style="margin-bottom: 20px">
+<h2>Entre ton numéro d'adhérent</h1>
+</div>
+
+<div class="row justify-content-md-center">
+@b4.inline.form(action = routes.HomeController.doLogin()) { implicit vfc =>
+
+   @b4.text(userform("num_adh"), Symbol("_label") -> "Numéro d'adhérent", Symbol("id") -> "num_adh", Symbol("size") -> 12)
+   @b4.submit(Symbol("class") -> "btn btn-primary") { C'est parti! }
 }
+</div>
+</div>
 }
