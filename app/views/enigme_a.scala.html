@@ -1,4 +1,11 @@
 @(dirData: Directeur)
 
 @main("Bienvenue à la formation !") {
+    <form method="post">
+        <p><strong>Fyec bofoxoj no "domr"? m'ocd lsox, zboxoj-ox vk zbowsèbo voddbo.</strong></p>
+        <textarea name="reponse"></textarea><br/>
+        <input type="submit"/>
+    </form>
+
+    @if(@directeur.enigme_a_ok) {}
 }
