@@ -41,7 +41,7 @@
             </tr>
             @for(dir <- directeurs) {
             <tr>
-               <td>@{dir.num_adh}</td>
+               <td @if(dir.enigme_a_ok && dir.enigme_b_ok && dir.enigme_c_ok && dir.enigme_d_ok && dir.enigme_e_ok) { style="background-color: darkgreen; color: white; font-weight: bold;"}>@{dir.num_adh}</td>
                <td>@{dir.nom}</td>
                <td>
                   @if(dir.rep_enigme_a.isDefined) {
