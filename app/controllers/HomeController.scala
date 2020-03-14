@@ -134,4 +134,8 @@ class HomeController @Inject()(storage: DirecteurRepository, cc: ControllerCompo
     val dirs: List[Directeur] = storage.getAll
     Ok(views.html.list_results(request.dir, dirs))
   }
+
+  def perdu = Sessioned { implicit request =>
+    Ok(views.html.perdu(request.dir))
+  }
 }

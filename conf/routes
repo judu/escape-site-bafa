@@ -7,6 +7,10 @@
 GET     /                           controllers.HomeController.index
 GET     /login                      controllers.HomeController.loginPage
 POST    /login                      controllers.HomeController.doLogin
+GET     /enigmes/7jydoko9           controllers.HomeController.perdu
+GET     /enigmes/ro9qxhdm           controllers.HomeController.perdu
+GET     /enigmes/3hnwdoqk           controllers.HomeController.perdu
+GET     /enigmes/vxtcn47p           controllers.HomeController.perdu
 GET     /enigmes/ryy44vpp           controllers.HomeController.page_enigme_a
 GET     /enigmes/iuoyuw7b           controllers.HomeController.page_enigme_b
 GET     /enigmes/4vgijd7t           controllers.HomeController.page_enigme_c

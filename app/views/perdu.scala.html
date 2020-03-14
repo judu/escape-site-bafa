@@ -1,5 +1,13 @@
-@()
+@(directeur: Directeur)
 
-@main("Bienvenue à la formation !") {
-    <h1>Tu t'es perdu ?</h1>
+@main("Perdu ?", directeur.nom) {
+<div class="row justify-content-md-center" style="margin: 30px 10px 5px 10px">
+   <h4>Bah alors @{directeur.nom.toLowerCase.capitalize}, tu t'es perdu&nbsp;? 😏</h4>
+</div>
+
+<div class="row justify-content-md-center" style="margin: 30px 10px 5px 10px">
+   <img src="https://media.giphy.com/media/d2jjuAZzDSVLZ5kI/source.gif" alt="un gif drôle"/>
+</div>
+
+
 }
