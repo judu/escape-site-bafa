@@ -7,7 +7,7 @@
 </div>
 
     @if(!directeur.enigme_d_ok) {
-    <div class="row justify-content-lg-center">
+    <div class="row justify-content-md-center">
     @b4.vertical.form(action = routes.HomeController.upload_enigme_d()) { implicit vfc =>
     <div class="form-group" id="reponse_field">
        <label for="reponse">Ta réponse @if(directeur.rep_enigme_d.isDefined) { est en

@@ -14,19 +14,22 @@
 
 	<div class="grid-wrapper container-fluid">
 		<a href="@routes.HomeController.page_enigme_d()" class="lien-accueil box1 bg-primary text-white">
-         @if(directeur.enigme_d_ok){<span class="badge badge-dark reponse">E</span>}
+         @if(directeur.enigme_d_ok){<span class="badge badge-dark reponse">⭐️</span>}
+         @if(directeur.rep_enigme_d.isDefined && !directeur.enigme_d_ok){<span class="badge badge-warning reponse">⏱</span>}
 			<div>
 				Malle des tarières pour faire des trous carrés
 			</div>
 		</a>
 		<a href="@routes.HomeController.page_enigme_e()" class="lien-accueil box2 bg-success text-white">
          @if(directeur.enigme_e_ok){<span class="badge badge-dark reponse">N</span>}
+         @if(directeur.rep_enigme_e.isDefined && !directeur.enigme_e_ok){<span class="badge badge-warning reponse">⏱</span>}
 			<div>
 				Journée à l'envers
 			</div>
 		</a>
 		<a href="@routes.HomeController.page_enigme_a()" class="lien-accueil box3 bg-warning text-dark">
          @if(directeur.enigme_a_ok){<span class="badge badge-dark reponse">I</span>}
+         @if(directeur.rep_enigme_a.isDefined && !directeur.enigme_a_ok){<span class="badge badge-warning reponse">⏱</span>}
 			<div>
 				Bien utiliser le Safékdal au quotidien
 			</div>
@@ -38,12 +41,14 @@
 		</a>
 		<a href="@routes.HomeController.page_enigme_c()" class="lien-accueil box5 bg-info text-white">
          @if(directeur.enigme_c_ok){<span class="badge badge-dark reponse">J</span>}
+         @if(directeur.rep_enigme_c.isDefined && !directeur.enigme_c_ok){<span class="badge badge-warning reponse">⏱</span>}
 			<div>
 				Acheter sa qualif' de directeur
 			</div>
 		</a>
 		<a href="@routes.HomeController.page_enigme_b()" class="lien-accueil box6 bg-danger text-dark">
          @if(directeur.enigme_b_ok){<span class="badge badge-dark reponse">X</span>}
+         @if(directeur.rep_enigme_b.isDefined && !directeur.enigme_b_ok){<span class="badge badge-warning reponse">⏱</span>}
 			<div>
 				La pédagogie pour les nuls
 			</div>
