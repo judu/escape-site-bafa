@@ -1,9 +1,149 @@
-.lien-accueil
-{
-    padding:5px;
+.lien-accueil {
+    padding-top: 3em;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 3em;
     color:black;
     text-decoration:none;
     border:2px solid black;
-    border-radius: 10px 100px / 120px;
-    display:inline-block;
+    border-radius: 10px 80px / 100px;
+	 display: flex;
+    align-items: center;
+    justify-content: center;
+	 font-weight: bold;
+    position: relative;
+}
+
+.reponse {
+   font-family: serif;
+   position: absolute;
+   left: 10px;
+   top: 5px;
+   font-size: 1.1em;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+@media(max-width: 1024px) {
+	.grid-wrapper {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(4, 1fr);
+		row-gap: 10px;
+		column-gap: 10px;
+
+	}
+
+	.box1 {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
+
+	.box2 {
+		grid-column-start: 3;
+		grid-column-end: 4;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
+
+	.box3 {
+		grid-column-start: 4;
+		grid-column-end: 5;
+		grid-row-start: 2;
+		grid-row-end: 3;
+	}
+
+	.box4 {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 2;
+		grid-row-end: 3;
+	}
+
+	.box5 {
+		grid-column-start: 2;
+		grid-column-end: 3;
+		grid-row-start: 4;
+		grid-row-end: 5;
+	}
+
+	.box6 {
+		grid-column-start: 3;
+		grid-column-end: 4;
+		grid-row-start: 3;
+		grid-row-end: 4;
+	}
+
+	.box7 {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 3;
+		grid-row-end: 4;
+	}
+}
+
+@media(min-width: 1024px) {
+
+.grid-wrapper {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	row-gap: 30px;
+	column-gap: 30px;
+
+}
+
+.box1 {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.box2 {
+	grid-column-start: 7;
+	grid-column-end: 9;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.box3 {
+	grid-column-start: 5;
+	grid-column-end: 6;
+	grid-row-start: 1;
+	grid-row-end: 3;
+}
+
+.box4 {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+.box5 {
+	grid-column-start: 10;
+	grid-column-end: 12;
+	grid-row-start: 2;
+	grid-row-end: 4;
+}
+
+.box6 {
+	grid-column-start: 3;
+	grid-column-end: 5;
+	grid-row-start: 3;
+	grid-row-end: 4;
+}
+
+.box7 {
+	grid-column-start: 6;
+	grid-column-end: 8;
+	grid-row-start: 2;
+	grid-row-end: 4;
+}
+
 }

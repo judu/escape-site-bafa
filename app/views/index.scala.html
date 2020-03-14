@@ -1,15 +1,58 @@
 @(directeur: Directeur)
 
 @main("Index 14 mars", directeur.nom) {
-  <h1>Bienvenue à la formation&nbsp;!</h1>
+<section class="histoire">
+	<div class="row justify-content-md-center" style="margin: 30px">
+		<h2> Bienvenue à toi, qui viens d'arriver
+			<span style="font-size: small">(pour trouver et découvrir… 🎶)</span>
+		</h2>
+	</div>
+	<div class="row justify-content-md-center" style="margin: 30px">
+		<p>Pour ouvrir le cryptex, tu devras résoudre toutes ces énigmes et peut-être même
+			plus…</p>
+	</div>
 
-  <section class="histoire">
-	  <div class="lien-accueil"><a href="@routes.HomeController.page_enigme_d()">Malle des tarières pour faire des trous carrés</a></div>
-	  <div class="lien-accueil"><a href="@routes.HomeController.page_enigme_e()">Journée à l'envers</a></div>
-	  <div class="lien-accueil"><a href="@routes.HomeController.page_enigme_a()">Bien utiliser le Safékdal au quotidien</a></div>
-	  <div class="lien-accueil"><a href="/enigmes/vxtcn47p">Devenir DT en seulement 3 étapes</a></div>
-	  <div class="lien-accueil"><a href="@routes.HomeController.page_enigme_c()">Acheter sa qualif' de directeur</a></div>
-	  <div class="lien-accueil"><a href="@routes.HomeController.page_enigme_b()">La pédagogie pour les nuls</a></div>
-	  <div class="lien-accueil"><a href="/enigmes/3hnwdoqk">Mille et une recettes pour bien cuisiner le gazon</a></div>
-  </section>
+	<div class="grid-wrapper container-fluid">
+		<a href="@routes.HomeController.page_enigme_d()" class="lien-accueil box1 bg-primary text-white">
+         @if(directeur.enigme_d_ok){<span class="badge badge-dark reponse">E</span>}
+			<div>
+				Malle des tarières pour faire des trous carrés
+			</div>
+		</a>
+		<a href="@routes.HomeController.page_enigme_e()" class="lien-accueil box2 bg-success text-white">
+         @if(directeur.enigme_e_ok){<span class="badge badge-dark reponse">N</span>}
+			<div>
+				Journée à l'envers
+			</div>
+		</a>
+		<a href="@routes.HomeController.page_enigme_a()" class="lien-accueil box3 bg-warning text-dark">
+         @if(directeur.enigme_a_ok){<span class="badge badge-dark reponse">I</span>}
+			<div>
+				Bien utiliser le Safékdal au quotidien
+			</div>
+		</a>
+		<a href="/enigmes/vxtcn47p" class="lien-accueil box4 bg-secondary text-white">
+			<div>
+				Devenir DT en seulement 3 étapes
+			</div>
+		</a>
+		<a href="@routes.HomeController.page_enigme_c()" class="lien-accueil box5 bg-info text-white">
+         @if(directeur.enigme_c_ok){<span class="badge badge-dark reponse">J</span>}
+			<div>
+				Acheter sa qualif' de directeur
+			</div>
+		</a>
+		<a href="@routes.HomeController.page_enigme_b()" class="lien-accueil box6 bg-danger text-dark">
+         @if(directeur.enigme_b_ok){<span class="badge badge-dark reponse">X</span>}
+			<div>
+				La pédagogie pour les nuls
+			</div>
+		</a>
+		<a href="/enigmes/3hnwdoqk" class="lien-accueil box7 bg-light text-dark">
+			<div>
+				Mille et une recettes pour bien cuisiner le gazon
+			</div>
+		</a>
+	</div>
+</section>
 }
